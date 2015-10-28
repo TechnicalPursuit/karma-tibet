@@ -1,0 +1,42 @@
+{
+  "name": "karma-tibet",
+  "version": "0.1.0",
+  "description": "A Karma plugin. Adapter for TIBET test harness.",
+  "keywords": [ "TIBET", "Karma" ],
+  "homepage": "http://www.technicalpursuit.com",
+  "author": {
+    "name": "Technical Pursuit Inc.",
+    "email": "tibet@technicalpursuit.com",
+    "url": "http://www.technicalpursuit.com"
+  },
+  "contributors": [
+    {
+      "name": "Scott Shattuck",
+      "email": "ss@technicalpursuit.com"
+    },
+    {
+      "name": "William J. Edney",
+      "email": "bedney@technicalpursuit.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/TechnicalPursuit/karma-tibet"
+  },
+  "bugs": {
+    "url": "http://github.com/TechnicalPursuit/karma-tibet/issues",
+    "email": "tibet@technicalpursuit.com"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+  },
+  "dependencies": {
+    "express": "*",
+    "serve-static": "*"
+  },
+  "devDependencies": {
+  },
+  "peerDependencies": {
+    "karma": ">=0.9"
+  }
+}
