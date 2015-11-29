@@ -16,29 +16,58 @@
 
 //  ----------------------------------------------------------------------------
 
-/* eslint indent:0 */
+/* eslint indent:0, no-console:0, no-extra-parens:0 */
 (function(root) {
 
-var express,
-    static,
-    app,
-    http,
-    path,
-    json,
-    timeout,
+var app,
     browsers,
+    express,
+    files,
+    fs,
+    fullpath,
+    http,
+    json,
     level,
+    path,
     port,
-    proxy;
+    proxy,
+    static,
+    timeout;
 
 //  ----------------------------------------------------------------------------
 //  TIBET Configuration Data
 //  ----------------------------------------------------------------------------
 
     path = require('path');
+    fs = require('fs');
+
+    fullpath = path.join(__dirname, 'tibet.json');
+    if (!fs.existsSync(fullpath)) {
+        files = fs.readdirSync(__dirname);
+        files.some(function(file) {
+            var stat;
+
+            stat = fs.lstatSync(file);
+            if (stat.isDirectory()) {
+                fullpath = path.join(__dirname, file, 'tibet.json');
+                if (fs.existsSync(fullpath)) {
+                    return true;
+                }
+            }
+
+            fullpath = null;
+            return false;
+        });
+    }
+
+    if (!fullpath) {
+        console.error('Unable to find TIBET configuration file tibet.json.');
+        process.exit(1);
+    }
 
     //  Load TIBET's configuration file to check for karma settings.
-    json = require(path.join(__dirname, './tibet.json'));
+    json = require(fullpath);
+
     if (json && json.karma) {
 
         if (json.karma.browsers) {
