@@ -55,7 +55,7 @@ the command line. Current values are shown below:
 $ tibet config karma
 
 {
-    "karma.boot.profile": "standard#contributor",
+    "karma.boot.profile": "app#contributor",
     "karma.boot.unminified": false,
     "karma.boot.unpackaged": false,
     "karma.loader": "tibet_loader.min.js",
