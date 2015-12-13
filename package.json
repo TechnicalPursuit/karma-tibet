@@ -29,10 +29,12 @@
   },
   "main": "lib/index.js",
   "scripts": {
+      "postinstall": "node scripts/install.js"
   },
   "dependencies": {
     "express": "*",
-    "serve-static": "*"
+    "serve-static": "*",
+    "shelljs": "*"
   },
   "devDependencies": {
   },

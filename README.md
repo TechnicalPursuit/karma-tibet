@@ -1,5 +1,4 @@
 # karma-tibet
-TIBET Karma Test Runner Adapter
 
 The `karma-tibet` adapter allows you to use Karma as a test runner for `TIBET`
 tests.
@@ -20,14 +19,12 @@ Once Karma is installed use the following npm command to install the adapter:
 $ npm install --save-dev karma-tibet
 ```
 
-Copy the sample karma.conf.js file contained in the package to your TIBET
-project's root directory using a command similar to:
+As a post-install step the karma-tibet package will copy a prebuilt
+`karma.conf.js` file to your TIBET project directory. If you
+already have a `karma.conf.js` file it will by moved to `karma.conf.js.orig` to
+preserve any settings you have in place.
 
-```
-$ cp ./node_modules/karma-tibet/karma.conf.js .
-```
-
-Once these steps are complete you should be able to run your TIBET tests using
+Once installation is complete you should be able to run your TIBET tests using
 the following command from the root of your project:
 
 ```
@@ -36,15 +33,15 @@ $ karma start
 
 ### karma.conf.js
 
-The karma-tibet adapter includes a sample karma.conf.js file which is
+The `karma-tibet` adapter includes a prebuilt `karma.conf.js` file which is
 specifically designed to integrate with TIBET projects. This integration means
-that for the most part you won't need to edit your karma.conf.js file but can
+that for the most part you won't need to edit your `karma.conf.js` file but can
 instead make use of TIBET's configuration system to define how you want your
 tests to run.
 
-As mentioned in the section on installation simply copy the default file from
-your node\_modules/karma-tibet directory to your project root directory to get
-started.
+Because TIBET is an emphatically single-page framework that boots once on
+startup it's important to rely on the default configuration for karma startup
+and define you test targets via normal TIBET means.
 
 ### tibet config karma
 
