@@ -30,8 +30,8 @@
             if (err) {
                 console.error(
                     'See documentation for configuration instructions.');
-                process.exit(0);
             }
+            process.exit(0);
         }
     }
 
