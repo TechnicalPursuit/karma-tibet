@@ -47,7 +47,7 @@ var app,
         files.some(function(file) {
             var stat;
 
-            stat = fs.lstatSync(file);
+            stat = fs.lstatSync(path.join(__dirname, file));
             if (stat.isDirectory()) {
                 fullpath = path.join(__dirname, file, 'tibet.json');
                 if (fs.existsSync(fullpath)) {
