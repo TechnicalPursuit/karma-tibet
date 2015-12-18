@@ -11,7 +11,8 @@
 /**
  * @overview Karma test runner configuration specific to TIBET projects. Under
  *     normal circumstances you shouldn't need to alter this file, you can use
- *     a "karma" property in your project's tibet.json file to set properties.
+ *     a "karma" block in your project's tibet.json file to set properties which
+ *     drive the various settings of your karma-tibet configuration.
  */
 
 //  ----------------------------------------------------------------------------
@@ -102,9 +103,20 @@ var app,
 module.exports = function(config) {
 
     //  Default karma-only settings while inside function where config is valid.
-    browsers = browsers || ['Chrome'];
+    browsers = browsers || ['Chrome', 'PhantomJS'];
     level = (level !== undefined) ? level : config.LOG_INFO,
     timeout = timeout || 15000;
+
+    //  The PhantomJS launcher for karma doesn't use the proxy and so we have to
+    //  do the heavier approach of copying the entire project so it can be
+    //  served by the karma web server.
+    files = [];
+    if (browsers.indexOf('PhantomJS') !== -1) {
+        files.unshift({
+            pattern: path.join(__dirname, 'public/**/*.*'),
+            served: true, included: false, watched: false, nocache: true
+        });
+    }
 
     config.set({
 
@@ -162,9 +174,18 @@ module.exports = function(config) {
         '/base/': 'http://127.0.0.1:' + proxy + '/'
     },
 
+    //  Pass tibet.json data along as client arguments so the client-side logic
+    //  can access those boot parameters. Note we only pass any karma block that
+    //  might exist.
+    client: {
+        args: [JSON.stringify(json.karma || {})]
+    },
+
     //  Yes, there are no files. The adapter loads TIBET and it does the rest.
-    //  Adding files will in most cases cause things to fail to boot properly.
-    files: [],
+    //  Adding files will in most cases cause things to fail to boot properly
+    //  and creates a ton of overhead on startup while it copies your entire
+    //  TIBET project to another directory just so it can serve the same files.
+    files: files,
 
     //  No files, so no need to exclude anything. Don't add exclusions here or
     //  it's likely to cause the TIBET boot process/testing to fail.
@@ -187,14 +208,14 @@ module.exports = function(config) {
  * We don't want to have to start/stop a separate server instance to launch
  * TIBET properly so we create an ultralight version of a server here that
  * the tibet_loader can take advantage of to acquire the resources it needs.
- * This avoids the necessity of telling Karma about files that aren't tests.
+ * This avoids the necessity of telling Karma about files that aren't tests and
+ * having it copy them all just so it can serve them from a temp directory.
  */
 express = require('express');
-static = require('serve-static');
 http = require('http');
 
 app = express();
-app.use(static(__dirname));
+app.use(express.static(__dirname));
 http.createServer(app).listen(proxy);
 
 }(this));
