@@ -11,15 +11,29 @@ more effectively with various CI environments such as Travis CI and Sauce Labs.
 ### Installation
 
 First you'll want to install Karma following the instructions for your platform
-found at http://karma-runner.github.io/
+found at http://karma-runner.github.io/.
 
-Once Karma is installed use the following npm command to install the adapter:
+You can install karma either globally or locally to your project. The one caveat
+is that you should install your launcher plugins in the same fashion. In other
+words, if you install karma globally install your plugins globally as well.
+
+TIBET defaults to Chrome and PhantomJS as the standard launchers for testing so
+you would use the following commands for a project-local installation (or simply
+add -g for a global installation):
+
+```
+$ npm install --save-dev karma
+$ npm install --save-dev karma-chrome-launcher
+$ npm install --save-dev karma-phantomjs-launcher
+```
+
+Once Karma is installed use the following npm command to install `karma-tibet`:
 
 ```
 $ npm install --save-dev karma-tibet
 ```
 
-As a post-install step the karma-tibet package will copy a prebuilt
+As a post-install step the `karma-tibet` package will copy a prebuilt
 `karma.conf.js` file to your TIBET project directory. If you
 already have a `karma.conf.js` file it will by moved to `karma.conf.js.orig` to
 preserve any settings you have in place.
@@ -28,8 +42,14 @@ Once installation is complete you should be able to run your TIBET tests using
 the following command from the root of your project:
 
 ```
+# LOCAL INSTALLATION
+$ ./node_modules/.bin/karma start
+
+
+# GLOBAL INSTALLATION
 $ karma start
 ```
+
 
 ### karma.conf.js
 

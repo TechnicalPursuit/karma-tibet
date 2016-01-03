@@ -30,6 +30,7 @@ var app,
     json,
     level,
     path,
+    plugins,
     port,
     proxy,
     static,
@@ -79,6 +80,10 @@ var app,
             level = json.karma.level;
         }
 
+        if (json.karma.plugins) {
+            plugins = json.karma.plugins;
+        }
+
         if (json.karma.port) {
             port = json.karma.port;
         }
@@ -117,6 +122,10 @@ module.exports = function(config) {
             served: true, included: false, watched: false, nocache: true
         });
     }
+
+    plugins = plugins || browsers.map(function(item) {
+        return 'karma-' + item.toLowerCase() + '-launcher'
+    });
 
     config.set({
 
