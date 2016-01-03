@@ -17,14 +17,13 @@ You can install karma either globally or locally to your project. The one caveat
 is that you should install your launcher plugins in the same fashion. In other
 words, if you install karma globally install your plugins globally as well.
 
-TIBET defaults to Chrome and PhantomJS as the standard launchers for testing so
-you would use the following commands for a project-local installation (or simply
-add -g for a global installation):
+TIBET defaults to Chrome as the initial launcher for testing so you would use
+the following commands for a project-local installation (or simply add -g for a
+global installation):
 
 ```
 $ npm install --save-dev karma
 $ npm install --save-dev karma-chrome-launcher
-$ npm install --save-dev karma-phantomjs-launcher
 ```
 
 Once Karma is installed use the following npm command to install `karma-tibet`:
@@ -92,7 +91,7 @@ on a specific set of browsers we might use:
 
 ```
 "karma": {
-    "browsers": ["Chrome", "PhantomJS", "Firefox"]
+    "browsers": ["Chrome", "Firefox", "Safari"]
 },
 ```
 

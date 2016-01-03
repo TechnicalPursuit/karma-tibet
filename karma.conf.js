@@ -108,7 +108,7 @@ var app,
 module.exports = function(config) {
 
     //  Default karma-only settings while inside function where config is valid.
-    browsers = browsers || ['Chrome', 'PhantomJS'];
+    browsers = browsers || ['Chrome'];
     level = (level !== undefined) ? level : config.LOG_INFO,
     timeout = timeout || 15000;
 
