@@ -11,24 +11,24 @@ more effectively with various CI environments such as Travis CI and Sauce Labs.
 ### Installation
 
 First you'll want to install Karma following the instructions for your platform
-found at http://karma-runner.github.io/.
+found at https://karma-runner.github.io/latest/intro/installation.html.
 
-You can install karma either globally or locally to your project. The one caveat
-is that you should install your launcher plugins in the same fashion. In other
-words, if you install karma globally install your plugins globally as well.
+TIBET defaults to Chrome as the initial launcher for testing so you would
+typically use the following commands to install karma's CLI and the local
+modules your project requires:
 
-TIBET defaults to Chrome as the initial launcher for testing so you would use
-the following commands for a project-local installation (or simply add -g for a
-global installation):
+``` bash
+# globally install the karma-cli module (to let you run karma easily).
+$ npm install -g karma-cli
 
-```
+# locally install the karma module and the appropriate launchers (Chrome etc)
 $ npm install --save-dev karma
 $ npm install --save-dev karma-chrome-launcher
 ```
 
 Once Karma is installed use the following npm command to install `karma-tibet`:
 
-```
+``` bash
 $ npm install --save-dev karma-tibet
 ```
 
@@ -40,13 +40,12 @@ preserve any settings you have in place.
 Once installation is complete you should be able to run your TIBET tests using
 the following command from the root of your project:
 
-```
-# LOCAL INSTALLATION
-$ ./node_modules/.bin/karma start
-
-
-# GLOBAL INSTALLATION
+``` bash
+# with karma-cli module installed:
 $ karma start
+
+# without the karma-cli module installed:
+$ ./node_modules/.bin/karma start
 ```
 
 
@@ -94,6 +93,29 @@ on a specific set of browsers we might use:
     "browsers": ["Chrome", "Firefox", "Safari"]
 },
 ```
+
+### Troubleshooting
+
+##### Browser Doesn't Launch
+
+One thing that can occur if your Chrome, Firefox, or other browser installation
+location doesn't match the location a particular karma launch plugin expects
+is you'll type `karma start` but the browser(s) won't appear. If that happens
+ensure you set the appropriate environment variables using syntax for your
+platform and shell similar to:
+
+``` bash
+# Chrome
+export CHROME_BIN=/Users/yourusername/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+
+# Firefox
+export FIREFOX_BIN=/Applications/Firefox420.app/Contents/MacOS/firefox
+```
+
+Note that you'll need to use the paths specific to your machine and browser
+install directories, however once you get these variables set properly you
+should see karma start and execute your tests properly.
+
 
 ### More Info
 
