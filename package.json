@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "express": "*",
-    "serve-static": "*",
     "shelljs": "*"
   },
   "devDependencies": {
