@@ -31,6 +31,7 @@ var app,
     level,
     path,
     plugins,
+    launchers,
     port,
     proxy,
     static,
@@ -123,6 +124,17 @@ module.exports = function(config) {
         });
     }
 
+    launchers = {
+        Chrome_travis_ci: {
+            base: 'Chrome',
+            flags: ['--no-sandbox']
+        }
+    };
+
+    if (process.env.TRAVIS) {
+        browsers = ['Chrome_travis_ci'];
+    }
+
     plugins = plugins || browsers.map(function(item) {
         return 'karma-' + item.toLowerCase() + '-launcher'
     });
@@ -141,6 +153,8 @@ module.exports = function(config) {
     // start these browsers for testing
     // See https://npmjs.org/browse/keyword/karma-launcher
     browsers: browsers,
+
+    customLaunchers: launchers,
 
     // options include: config.LOG_DISABLE ||
     // config.LOG_ERROR || config.LOG_WARN ||

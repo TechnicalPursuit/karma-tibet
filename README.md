@@ -71,8 +71,9 @@ $ tibet config karma
 
 {
     "karma.boot.profile": "app#contributor",
-    "karma.boot.unminified": false,
-    "karma.boot.unpackaged": false,
+    "karma.boot.minified": true,
+    "karma.boot.resourced": true,
+    "karma.boot.teamtibet": false,
     "karma.loader": "tibet_loader.min.js",
     "karma.port": 9876,
     "karma.proxy": 9877,
