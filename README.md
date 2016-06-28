@@ -21,9 +21,13 @@ modules your project requires:
 # globally install the karma-cli module (to let you run karma easily).
 $ npm install -g karma-cli
 
-# locally install the karma module and the appropriate launchers (Chrome etc)
+# locally install the karma module and the appropriate launchers (Chrome,
+Firefox, Safari, IE etc.)
 $ npm install --save-dev karma
 $ npm install --save-dev karma-chrome-launcher
+$ npm install --save-dev karma-firefox-launcher
+$ npm install --save-dev karma-safari-launcher
+$ npm install --save-dev karma-ie-launcher
 ```
 
 Once Karma is installed use the following npm command to install `karma-tibet`:
