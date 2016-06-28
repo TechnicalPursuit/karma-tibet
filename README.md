@@ -21,8 +21,7 @@ modules your project requires:
 # globally install the karma-cli module (to let you run karma easily).
 $ npm install -g karma-cli
 
-# locally install the karma module and the appropriate launchers (Chrome,
-Firefox, Safari, IE etc.)
+# locally install the karma module and the appropriate launchers (Chrome, Firefox, Safari, IE etc.)
 $ npm install --save-dev karma
 
 $ npm install --save-dev karma-chrome-launcher
