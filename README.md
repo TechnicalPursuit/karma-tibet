@@ -24,6 +24,7 @@ $ npm install -g karma-cli
 # locally install the karma module and the appropriate launchers (Chrome,
 Firefox, Safari, IE etc.)
 $ npm install --save-dev karma
+
 $ npm install --save-dev karma-chrome-launcher
 $ npm install --save-dev karma-firefox-launcher
 $ npm install --save-dev karma-safari-launcher
