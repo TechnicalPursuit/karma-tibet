@@ -204,8 +204,12 @@ module.exports = function(config) {
     //  This is necessary since Karma "connects" quickly but depending on your
     //  TIBET boot configuration it can be close to 10 seconds (the default
     //  timeout) before TIBET starts sending output to Karma for testing.
-    browserNoActivityTimeout: timeout
+    browserNoActivityTimeout: timeout,
 
+    //  Tell Karma how long to wait for the browser to try to reconnect
+    //  (sometimes the browser disconnects) before terminating the testing
+    //  session.
+    browserDisconnectTimeout: timeout
     })
 };
 
