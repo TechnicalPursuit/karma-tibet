@@ -34,7 +34,6 @@ var app,
     launchers,
     port,
     proxy,
-    static,
     timeout;
 
 //  ----------------------------------------------------------------------------
@@ -110,7 +109,7 @@ module.exports = function(config) {
 
     //  Default karma-only settings while inside function where config is valid.
     browsers = browsers || ['Chrome'];
-    level = (level !== undefined) ? level : config.LOG_INFO,
+    level = (level !== undefined) ? level : config.LOG_INFO;
     timeout = timeout || 15000;
 
     //  The PhantomJS launcher for karma doesn't use the proxy and so we have to
@@ -136,7 +135,7 @@ module.exports = function(config) {
     }
 
     plugins = plugins || browsers.map(function(item) {
-        return 'karma-' + item.toLowerCase() + '-launcher'
+        return 'karma-' + item.toLowerCase() + '-launcher';
     });
 
     config.set({
@@ -224,7 +223,7 @@ module.exports = function(config) {
     //  (sometimes the browser disconnects) before terminating the testing
     //  session.
     browserDisconnectTimeout: timeout
-    })
+    });
 };
 
 //  ----------------------------------------------------------------------------
