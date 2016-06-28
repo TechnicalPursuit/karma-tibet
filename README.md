@@ -74,11 +74,12 @@ the command line. Current values are shown below:
 $ tibet config karma
 
 {
-    "karma.boot.profile": "app#contributor",
     "karma.boot.minified": true,
+    "karma.boot.profile": "main#contributor",
     "karma.boot.resourced": true,
     "karma.boot.teamtibet": false,
-    "karma.loader": "tibet_loader.min.js",
+    "karma.load_path": "TIBET-INF/tibet/lib/src",
+    "karma.load_script": "tibet_loader.min.js",
     "karma.port": 9876,
     "karma.proxy": 9877,
     "karma.script": ":test",
@@ -89,13 +90,13 @@ $ tibet config karma
 
 ### tibet.json
 
-Using TIBET's configuration system or directly editing the `tibet.json` file
+Using TIBET's configuration system or directly editing the `public/tibet.json` file
 allows you to modify any of the karma configuration values. For example, to run
 on a specific set of browsers we might use:
 
 ```
 "karma": {
-    "browsers": ["Chrome", "Firefox", "Safari"]
+    "browsers": ["Chrome", "Firefox", "Safari", "IE"]
 },
 ```
 
