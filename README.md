@@ -84,7 +84,7 @@ $ tibet config karma
     "karma.proxy": 9877,
     "karma.script": ":test",
     "karma.slot": "__karma__",
-    "karma.timeout": 15000
+    "karma.timeout": 30000
 }
 ```
 
