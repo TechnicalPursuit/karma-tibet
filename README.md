@@ -46,6 +46,9 @@ Once installation is complete you should be able to run your TIBET tests using
 the following command from the root of your project:
 
 ``` bash
+# using the 'tibet test' command:
+$ tibet test
+
 # with karma-cli module installed:
 $ karma start
 
