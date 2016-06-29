@@ -45,6 +45,7 @@ var app,
     path = require('path');
     fs = require('fs');
     tibet = require('tibet');
+    beautify = require('js-beautify');
 
     package = new tibet.Package();
 
@@ -60,6 +61,10 @@ var app,
         plugins = cfgval;
     }
 
+    if (cfgval = package.getcfg('karma.host')) {
+        host = cfgval;
+    }
+
     if (cfgval = package.getcfg('karma.port')) {
         port = cfgval;
     }
@@ -73,6 +78,7 @@ var app,
     }
 
     //  Default the values needed by both karma and our proxy server here.
+    host = host || '0.0.0.0';
     port = port || 9876;
     proxy = proxy || (port + 1);
 
@@ -81,6 +87,7 @@ var app,
 //  ----------------------------------------------------------------------------
 
 module.exports = function(config) {
+    var dict;
 
     //  Default karma-only settings while inside function where config is valid.
     browsers = browsers || ['Chrome'];
@@ -113,92 +120,105 @@ module.exports = function(config) {
         return 'karma-' + item.toLowerCase() + '-launcher';
     });
 
-    config.set({
+    if (process.argv.join(' ').indexOf('--debug') !== -1) {
+        package.setcfg('karma.debug', true);
+    }
 
-    //  ------------------------------------------------------------------------
-    //  Stuff You May Want To Change
-    //  ------------------------------------------------------------------------
+    dict = {
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits, otherwise you
-    // hit the DEBUG button to run tests and can re-run via reload etc.
-    singleRun: true,
+        //  --------------------------------------------------------------------
+        //  Stuff You May Want To Change
+        //  --------------------------------------------------------------------
 
-    // start these browsers for testing
-    // See https://npmjs.org/browse/keyword/karma-launcher
-    browsers: browsers,
+        // Continuous Integration mode
+        // if true, Karma captures browsers, runs the tests and exits, otherwise
+        // you hit the DEBUG button to run tests and can re-run via reload etc.
+        singleRun: true,
 
-    customLaunchers: launchers,
+        // start these browsers for testing
+        // See https://npmjs.org/browse/keyword/karma-launcher
+        browsers: browsers,
 
-    // options include: config.LOG_DISABLE ||
-    // config.LOG_ERROR || config.LOG_WARN ||
-    // config.LOG_INFO || config.LOG_DEBUG
-    logLevel: level !== undefined ? level : config.LOG_INFO,
+        customLaunchers: launchers,
 
-    // preprocess matching files before serving them to the browser?
-    // See https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {},
+        // options include: config.LOG_DISABLE ||
+        // config.LOG_ERROR || config.LOG_WARN ||
+        // config.LOG_INFO || config.LOG_DEBUG
+        logLevel: level !== undefined ? level : config.LOG_INFO,
 
-    // test results reporter to use. possible values: 'dots', 'progress'.
-    // See https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+        // preprocess matching files before serving them to the browser?
+        // See https://npmjs.org/browse/keyword/karma-preprocessor
+        preprocessors: {},
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
+        // test results reporter to use. possible values: 'dots', 'progress'.
+        // See https://npmjs.org/browse/keyword/karma-reporter
+        reporters: ['progress'],
 
-    // enable / disable executing tests whenever any file changes
-    autoWatch: false,
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
 
-    //  ------------------------------------------------------------------------
-    //  The Other Stuff
-    //  ------------------------------------------------------------------------
+        // enable / disable executing tests whenever any file changes
+        autoWatch: false,
 
-    frameworks: ['tibet'],
+        //  --------------------------------------------------------------------
+        //  The Other Stuff
+        //  --------------------------------------------------------------------
 
-    useIframe: true,
+        frameworks: ['tibet'],
 
-    urlRoot: '/',
+        useIframe: true,
 
-    basePath: '',
+        urlRoot: '/',
 
-    port: port,
+        basePath: '',
 
-    //  Note we create a small express server to serve "static" content which
-    //  runs on the proxy port defined here. This lets TIBET boot without any
-    //  overhead in copying the entirety of TIBET and your application into a
-    //  temp directory. It also avoids other Karma issues with file mappings.
-    proxies: {
-        '/base/': 'http://127.0.0.1:' + proxy + '/'
-    },
+        hostname: host,
 
-    //  Pass tibet.json data along as client arguments so the client-side logic
-    //  can access those boot parameters. Note we only pass any karma block that
-    //  might exist.
-    client: {
-        args: [JSON.stringify(package.getcfg('karma') || {})]
-    },
+        port: port,
 
-    //  Yes, there are no files. The adapter loads TIBET and it does the rest.
-    //  Adding files will in most cases cause things to fail to boot properly
-    //  and creates a ton of overhead on startup while it copies your entire
-    //  TIBET project to another directory just so it can serve the same files.
-    files: files,
+        //  Note we create a small express server to serve "static" content
+        //  which runs on the proxy port defined here. This lets TIBET boot
+        //  without any overhead in copying the entirety of TIBET and your
+        //  application into a temp directory. It also avoids other Karma issues
+        //  with file mappings.
+        proxies: {
+            '/base/': 'http://' + host + ':' + proxy + '/'
+        },
 
-    //  No files, so no need to exclude anything. Don't add exclusions here or
-    //  it's likely to cause the TIBET boot process/testing to fail.
-    exclude: [],
+        //  Pass tibet.json data along as client arguments so the client-side logic
+        //  can access those boot parameters. Note we only pass any karma block that
+        //  might exist.
+        client: {
+            args: [JSON.stringify(package.getcfg('karma') || {})]
+        },
 
-    //  Tell Karma how long to wait (for boot etc) before inactivity disconnect.
-    //  This is necessary since Karma "connects" quickly but depending on your
-    //  TIBET boot configuration it can be close to 10 seconds (the default
-    //  timeout) before TIBET starts sending output to Karma for testing.
-    browserNoActivityTimeout: timeout,
+        //  Yes, there are no files. The adapter loads TIBET and it does the rest.
+        //  Adding files will in most cases cause things to fail to boot properly
+        //  and creates a ton of overhead on startup while it copies your entire
+        //  TIBET project to another directory just so it can serve the same files.
+        files: files,
 
-    //  Tell Karma how long to wait for the browser to try to reconnect
-    //  (sometimes the browser disconnects) before terminating the testing
-    //  session.
-    browserDisconnectTimeout: timeout
-    });
+        //  No files, so no need to exclude anything. Don't add exclusions here or
+        //  it's likely to cause the TIBET boot process/testing to fail.
+        exclude: [],
+
+        //  Tell Karma how long to wait (for boot etc) before inactivity disconnect.
+        //  This is necessary since Karma "connects" quickly but depending on your
+        //  TIBET boot configuration it can be close to 10 seconds (the default
+        //  timeout) before TIBET starts sending output to Karma for testing.
+        browserNoActivityTimeout: timeout,
+
+        //  Tell Karma how long to wait for the browser to try to reconnect
+        //  (sometimes the browser disconnects) before terminating the testing
+        //  session.
+        browserDisconnectTimeout: timeout
+    };
+
+    if (package.getcfg('karma.debug')) {
+        console.log(beautify(JSON.stringify(dict)));
+    }
+
+    config.set(dict);
 };
 
 //  ----------------------------------------------------------------------------
