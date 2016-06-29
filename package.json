@@ -38,7 +38,6 @@
   "devDependencies": {
   },
   "peerDependencies": {
-    "karma": ">=0.9",
-    "tibet": "5.x"
+    "karma": ">=0.9"
   }
 }
