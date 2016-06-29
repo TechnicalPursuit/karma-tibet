@@ -35,6 +35,7 @@ var app,
     plugins,
     launchers,
     port,
+    host,
     proxy,
     timeout;
 
