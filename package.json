@@ -1,6 +1,6 @@
 {
   "name": "karma-tibet",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Karma plugin. Adapter for TIBET test harness.",
   "keywords": [ "TIBET", "Karma" ],
   "homepage": "http://www.technicalpursuit.com",
@@ -38,6 +38,7 @@
   "devDependencies": {
   },
   "peerDependencies": {
-    "karma": ">=0.9"
+    "karma": ">=0.9",
+    "tibet": ">=0.5"
   }
 }

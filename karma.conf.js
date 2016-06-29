@@ -25,9 +25,11 @@ var app,
     express,
     files,
     fs,
+    tibet,
+    package,
     fullpath,
     http,
-    json,
+    cfgval,
     level,
     path,
     plugins,
@@ -42,59 +44,32 @@ var app,
 
     path = require('path');
     fs = require('fs');
+    tibet = require('tibet');
 
-    fullpath = path.join(__dirname, 'tibet.json');
-    if (!fs.existsSync(fullpath)) {
-        files = fs.readdirSync(__dirname);
-        files.some(function(file) {
-            var stat;
+    package = new tibet.Package();
 
-            stat = fs.lstatSync(path.join(__dirname, file));
-            if (stat.isDirectory()) {
-                fullpath = path.join(__dirname, file, 'tibet.json');
-                if (fs.existsSync(fullpath)) {
-                    return true;
-                }
-            }
-
-            fullpath = null;
-            return false;
-        });
+    if (cfgval = package.getcfg('karma.browsers')) {
+        browsers = cfgval;
     }
 
-    if (!fullpath) {
-        console.error('Unable to find TIBET configuration file tibet.json.');
-        process.exit(1);
+    if (cfgval = package.getcfg('karma.level')) {
+        level = cfgval;
     }
 
-    //  Load TIBET's configuration file to check for karma settings.
-    json = require(fullpath);
+    if (cfgval = package.getcfg('karma.plugins')) {
+        plugins = cfgval;
+    }
 
-    if (json && json.karma) {
+    if (cfgval = package.getcfg('karma.port')) {
+        port = cfgval;
+    }
 
-        if (json.karma.browsers) {
-            browsers = json.karma.browsers;
-        }
+    if (cfgval = package.getcfg('karma.proxy')) {
+        proxy = cfgval;
+    }
 
-        if (json.karma.level) {
-            level = json.karma.level;
-        }
-
-        if (json.karma.plugins) {
-            plugins = json.karma.plugins;
-        }
-
-        if (json.karma.port) {
-            port = json.karma.port;
-        }
-
-        if (json.karma.proxy) {
-            proxy = json.karma.proxy;
-        }
-
-        if (json.karma.timeout) {
-            timeout = json.karma.timeout;
-        }
+    if (cfgval = package.getcfg('karma.timeout')) {
+        timeout = cfgval;
     }
 
     //  Default the values needed by both karma and our proxy server here.
@@ -110,7 +85,7 @@ module.exports = function(config) {
     //  Default karma-only settings while inside function where config is valid.
     browsers = browsers || ['Chrome'];
     level = (level !== undefined) ? level : config.LOG_INFO;
-    timeout = timeout || 15000;
+    timeout = timeout || 30000;
 
     //  The PhantomJS launcher for karma doesn't use the proxy and so we have to
     //  do the heavier approach of copying the entire project so it can be
@@ -200,7 +175,7 @@ module.exports = function(config) {
     //  can access those boot parameters. Note we only pass any karma block that
     //  might exist.
     client: {
-        args: [JSON.stringify(json.karma || {})]
+        args: [JSON.stringify(package.getcfg('karma') || {})]
     },
 
     //  Yes, there are no files. The adapter loads TIBET and it does the rest.

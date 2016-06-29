@@ -10,20 +10,20 @@ more effectively with various CI environments such as Travis CI and Sauce Labs.
 
 ### Installation
 
-First you'll want to install Karma following the instructions for your platform
-found at https://karma-runner.github.io/latest/intro/installation.html.
-
-TIBET defaults to Chrome as the initial launcher for testing so you would
-typically use the following commands to install karma's CLI and the local
-modules your project requires:
+Install Karma following the instructions for your platform found at
+https://karma-runner.github.io/latest/intro/installation.html. For example:
 
 ``` bash
+# position yourself in your TIBET project
+cd {{project}}
+
 # globally install the karma-cli module (to let you run karma easily).
 $ npm install -g karma-cli
 
-# locally install the karma module and the appropriate launchers (Chrome, Firefox, Safari, IE etc.)
+# locally install the karma module
 $ npm install --save-dev karma
 
+# locally install target browser launchers (Chrome, Firefox, Safari, IE etc.)
 $ npm install --save-dev karma-chrome-launcher
 $ npm install --save-dev karma-firefox-launcher
 $ npm install --save-dev karma-safari-launcher
@@ -33,6 +33,7 @@ $ npm install --save-dev karma-ie-launcher
 Once Karma is installed use the following npm command to install `karma-tibet`:
 
 ``` bash
+# locally install the karma-tibet framework module
 $ npm install --save-dev karma-tibet
 ```
 
@@ -67,15 +68,15 @@ and define you test targets via normal TIBET means.
 
 ### tibet config karma
 
-TIBET's config command will dump current settings for karma properties by using
-the command line. Current values are shown below:
+TIBET's `tibet config` command can dump current settings for karma properties at
+the command line. Sample values are shown below:
 
 ```
 $ tibet config karma
 
 {
     "karma.boot.minified": true,
-    "karma.boot.profile": "main#contributor",
+    "karma.boot.profile": "main#developer",
     "karma.boot.resourced": true,
     "karma.boot.teamtibet": false,
     "karma.load_path": "TIBET-INF/tibet/lib/src",
@@ -90,9 +91,9 @@ $ tibet config karma
 
 ### tibet.json
 
-Using TIBET's configuration system or directly editing the `public/tibet.json` file
-allows you to modify any of the karma configuration values. For example, to run
-on a specific set of browsers we might use:
+Using TIBET's configuration system or directly editing the `public/tibet.json`
+file allows you to modify any of the karma configuration values. For example, to
+run on a specific set of browsers we might use:
 
 ```
 "karma": {
