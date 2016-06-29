@@ -93,7 +93,7 @@ module.exports = function(config) {
     //  Default karma-only settings while inside function where config is valid.
     browsers = browsers || ['Chrome'];
     level = (level !== undefined) ? level : config.LOG_INFO;
-    timeout = timeout || 30000;
+    timeout = timeout || 60000;
 
     //  The PhantomJS launcher for karma doesn't use the proxy and so we have to
     //  do the heavier approach of copying the entire project so it can be
