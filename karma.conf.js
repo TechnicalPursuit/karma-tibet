@@ -125,6 +125,20 @@ module.exports = function(config) {
         package.setcfg('karma.debug', true);
     }
 
+    //  See if the command line included arguments from `tibet test`
+    if (process.argv.indexOf('--tibettest') !== -1) {
+
+        //  Capture and unquote the arguments we've tunneled past karma start.
+        tibettest = process.argv[process.argv.indexOf('--tibettest') + 1];
+        tibettest = tibettest.slice(1, -1);
+        tibettest = tibettest.replace(/\\'/g, '\'');
+
+        //  Run that baby!
+        package.setcfg('karma.script', tibettest);
+        console.log('overriding karma.script with: ' +
+            package.getcfg('karma.script'));
+    }
+
     dict = {
 
         //  --------------------------------------------------------------------
