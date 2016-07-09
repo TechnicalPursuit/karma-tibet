@@ -116,7 +116,7 @@ platform and shell similar to:
 
 ``` bash
 # Chrome
-export CHROME_BIN=/Users/yourusername/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+export CHROME_BIN=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
 
 # Firefox
 export FIREFOX_BIN=/Applications/Firefox420.app/Contents/MacOS/firefox
