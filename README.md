@@ -79,7 +79,7 @@ $ tibet config karma
 
 {
     "karma.boot.minified": true,
-    "karma.boot.profile": "main#developer",
+    "karma.boot.profile": "main#testing",
     "karma.boot.resourced": true,
     "karma.boot.teamtibet": false,
     "karma.load_path": "TIBET-INF/tibet/lib/src",
