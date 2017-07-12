@@ -17,17 +17,16 @@
 
 //  ----------------------------------------------------------------------------
 
-/* eslint indent:0, no-console:0, no-extra-parens:0 */
+/* eslint indent:0, no-console:0, no-extra-parens:0, no-cond-assign:0 */
 (function(root) {
 
 var app,
+    beautify,
     browsers,
     express,
     files,
-    fs,
     tibet,
     package,
-    fullpath,
     http,
     cfgval,
     level,
@@ -44,7 +43,6 @@ var app,
 //  ----------------------------------------------------------------------------
 
     path = require('path');
-    fs = require('fs');
     tibet = require('tibet');
     beautify = require('js-beautify');
 
@@ -88,7 +86,8 @@ var app,
 //  ----------------------------------------------------------------------------
 
 module.exports = function(config) {
-    var dict;
+    var dict,
+        tibettest;
 
     //  Default karma-only settings while inside function where config is valid.
     browsers = browsers || ['Chrome'];
@@ -149,6 +148,7 @@ module.exports = function(config) {
         // if true, Karma captures browsers, runs the tests and exits, otherwise
         // you hit the DEBUG button to run tests and can re-run via reload etc.
         singleRun: true,
+        // singleRun: false,
 
         // start these browsers for testing
         // See https://npmjs.org/browse/keyword/karma-launcher
