@@ -80,7 +80,7 @@ $ tibet config karma
 {
     "karma.boot.minified": true,
     "karma.boot.profile": "main@developer",
-    "karma.boot.resourced": true,
+    "karma.boot.inlined": true,
     "karma.boot.teamtibet": false,
     "karma.load_path": "TIBET-INF/tibet/lib/src",
     "karma.load_script": "tibet_loader.min.js",
