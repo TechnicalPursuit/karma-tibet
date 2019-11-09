@@ -93,16 +93,23 @@ module.exports = function(config) {
     level = (level !== undefined) ? level : config.LOG_INFO;
     timeout = timeout || 60000;
 
-    launchers = {
-        Chrome_travis_ci: {
-            base: 'Chrome',
-            flags: ['--no-sandbox']
-        }
-    };
+    //  ---
 
+    //  For Travis... adjust for other CI systems
     if (process.env.TRAVIS) {
+        launchers = {
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        };
+
         browsers = ['Chrome_travis_ci'];
+    } else {
+        launchers = {}:
     }
+
+    //  ---
 
     plugins = plugins || browsers.map(function(item) {
         return 'karma-' + item.toLowerCase() + '-launcher';
