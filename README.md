@@ -78,9 +78,9 @@ the command line. Sample values are shown below:
 $ tibet config karma
 
 {
+    "karma.boot.inlined": true,
     "karma.boot.minified": true,
     "karma.boot.profile": "main@developer",
-    "karma.boot.inlined": true,
     "karma.boot.teamtibet": false,
     "karma.load_path": "TIBET-INF/tibet/lib/src",
     "karma.load_script": "tibet_loader.min.js",
