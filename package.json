@@ -2,7 +2,10 @@
   "name": "karma-tibet",
   "version": "0.1.14",
   "description": "A Karma plugin. Adapter for TIBET test harness.",
-  "keywords": [ "TIBET", "Karma" ],
+  "keywords": [
+    "TIBET",
+    "Karma"
+  ],
   "homepage": "http://www.technicalpursuit.com",
   "author": {
     "name": "Technical Pursuit Inc.",
@@ -29,7 +32,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-      "postinstall": "node scripts/install.js"
+    "postinstall": "node scripts/install.js"
   },
   "dependencies": {
     "express": "*",

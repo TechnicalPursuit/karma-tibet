@@ -132,35 +132,36 @@ module.exports = function(config) {
         //  Stuff You May Want To Change
         //  --------------------------------------------------------------------
 
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits, otherwise
-        // you hit the DEBUG button to run tests and can re-run via reload etc.
+        //  Continuous Integration mode
+        //  If true, Karma captures browsers, runs the tests and exits,
+        //  otherwise you hit the DEBUG button to run tests and can re-run via
+        //  reload etc.
         singleRun: true,
         // singleRun: false,
 
-        // start these browsers for testing
-        // See https://npmjs.org/browse/keyword/karma-launcher
+        //  start these browsers for testing
+        //  See https://npmjs.org/browse/keyword/karma-launcher
         browsers: browsers,
 
         customLaunchers: launchers,
 
-        // options include: config.LOG_DISABLE ||
-        // config.LOG_ERROR || config.LOG_WARN ||
-        // config.LOG_INFO || config.LOG_DEBUG
+        //  options include: config.LOG_DISABLE ||
+        //  config.LOG_ERROR || config.LOG_WARN ||
+        //  config.LOG_INFO || config.LOG_DEBUG
         logLevel: level !== undefined ? level : config.LOG_INFO,
 
-        // preprocess matching files before serving them to the browser?
-        // See https://npmjs.org/browse/keyword/karma-preprocessor
+        //  preprocess matching files before serving them to the browser?
+        //  See https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {},
 
-        // test results reporter to use. possible values: 'dots', 'progress'.
-        // See https://npmjs.org/browse/keyword/karma-reporter
+        //  test results reporter to use. possible values: 'dots', 'progress'.
+        //  See https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['progress'],
 
-        // enable / disable colors in the output (reporters and logs)
+        //  enable / disable colors in the output (reporters and logs)
         colors: true,
 
-        // enable / disable executing tests whenever any file changes
+        //  enable / disable executing tests whenever any file changes
         autoWatch: false,
 
         //  --------------------------------------------------------------------
@@ -188,27 +189,29 @@ module.exports = function(config) {
             '/base/': 'http://' + host + ':' + proxy + '/'
         },
 
-        //  Pass tibet.json data along as client arguments so the client-side logic
-        //  can access those boot parameters. Note we only pass any karma block that
-        //  might exist.
+        //  Pass tibet.json data along as client arguments so the client-side
+        //  logic can access those boot parameters. Note we only pass any karma
+        //  block that might exist.
         client: {
             args: [JSON.stringify(package.getcfg('karma') || {})]
         },
 
-        //  Yes, there are no files. The adapter loads TIBET and it does the rest.
-        //  Adding files will in most cases cause things to fail to boot properly
-        //  and creates a ton of overhead on startup while it copies your entire
-        //  TIBET project to another directory just so it can serve the same files.
+        //  Yes, there are no files. The adapter loads TIBET and it does the
+        //  rest. Adding files will in most cases cause things to fail to boot
+        //  properly and creates a ton of overhead on startup while it copies
+        //  your entire TIBET project to another directory just so it can serve
+        //  the same files.
         files: [],
 
-        //  No files, so no need to exclude anything. Don't add exclusions here or
-        //  it's likely to cause the TIBET boot process/testing to fail.
+        //  No files, so no need to exclude anything. Don't add exclusions here
+        //  or it's likely to cause the TIBET boot process/testing to fail.
         exclude: [],
 
-        //  Tell Karma how long to wait (for boot etc) before inactivity disconnect.
-        //  This is necessary since Karma "connects" quickly but depending on your
-        //  TIBET boot configuration it can be close to 10 seconds (the default
-        //  timeout) before TIBET starts sending output to Karma for testing.
+        //  Tell Karma how long to wait (for boot etc) before inactivity
+        //  disconnect. This is necessary since Karma "connects" quickly but
+        //  depending on your TIBET boot configuration it can be close to 10
+        //  seconds (the default timeout) before TIBET starts sending output to
+        //  Karma for testing.
         browserNoActivityTimeout: timeout,
 
         //  Tell Karma how long to wait for the browser to try to reconnect
