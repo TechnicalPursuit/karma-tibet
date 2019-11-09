@@ -106,7 +106,7 @@ module.exports = function(config) {
 
         browsers = ['Chrome_travis_ci'];
     } else {
-        launchers = {}:
+        launchers = {};
     }
 
     //  ---
