@@ -24,7 +24,6 @@ var app,
     beautify,
     browsers,
     express,
-    files,
     tibet,
     package,
     http,
@@ -93,17 +92,6 @@ module.exports = function(config) {
     browsers = browsers || ['Chrome'];
     level = (level !== undefined) ? level : config.LOG_INFO;
     timeout = timeout || 60000;
-
-    //  The PhantomJS launcher for karma doesn't use the proxy and so we have to
-    //  do the heavier approach of copying the entire project so it can be
-    //  served by the karma web server.
-    files = [];
-    if (browsers.indexOf('PhantomJS') !== -1) {
-        files.unshift({
-            pattern: path.join(__dirname, 'public/**/*.*'),
-            served: true, included: false, watched: false, nocache: true
-        });
-    }
 
     launchers = {
         Chrome_travis_ci: {
@@ -211,7 +199,7 @@ module.exports = function(config) {
         //  Adding files will in most cases cause things to fail to boot properly
         //  and creates a ton of overhead on startup while it copies your entire
         //  TIBET project to another directory just so it can serve the same files.
-        files: files,
+        files: [],
 
         //  No files, so no need to exclude anything. Don't add exclusions here or
         //  it's likely to cause the TIBET boot process/testing to fail.
