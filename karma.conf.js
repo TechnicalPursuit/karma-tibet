@@ -103,8 +103,6 @@ module.exports = function(config) {
                 flags: ['--no-sandbox']
             }
         };
-
-        browsers = ['Chrome_travis_ci'];
     } else {
         launchers = {};
     }
@@ -120,6 +118,8 @@ module.exports = function(config) {
     //  defined below as a 'framework'). Put a reference to 'karma-tibet' first
     //  in the plugins Array.
     plugins.unshift('karma-tibet');
+
+    //  ---
 
     if (process.argv.join(' ').indexOf('--debug') !== -1) {
         package.setcfg('karma.debug', true);
