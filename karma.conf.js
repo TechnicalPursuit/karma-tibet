@@ -115,6 +115,12 @@ module.exports = function(config) {
         return 'karma-' + item.toLowerCase() + '-launcher';
     });
 
+    //  Since we define our own plugins Array, Karma will not automatically
+    //  compute 'karma-tibet' as a plugin we need (we need it because 'tibet' is
+    //  defined below as a 'framework'). Put a reference to 'karma-tibet' first
+    //  in the plugins Array.
+    plugins.unshift('karma-tibet');
+
     if (process.argv.join(' ').indexOf('--debug') !== -1) {
         package.setcfg('karma.debug', true);
     }
@@ -149,6 +155,9 @@ module.exports = function(config) {
         //  start these browsers for testing
         //  See https://npmjs.org/browse/keyword/karma-launcher
         browsers: browsers,
+
+        //  and load these plugins
+        plugins: plugins,
 
         customLaunchers: launchers,
 
